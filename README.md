@@ -28,18 +28,7 @@ After that, we can use the correspondence to reconstruct 3D points through trian
 
 ## 3D Reconstruction with Multiple Cameras
 ### Validate Correspondence
-Before adding more images into scope, we first validate the correspondence. The plain correspondence we derived above might include some noises. This might not be obvious when we are only building the reconstruction with two images, but as we increase our data set size, the error will accumulate and bring a large number of false correspondence. Therefore, we use fundamental matrix to remove outliers. The formula for calculating fundamental matrix is
-$$F = K_1^{-T}([t]_{\times}R)K_2^{-1}$$
-where
-$$
-[t]_{\times} = 
-\begin{bmatrix}
-0 & -t_3 & t_2 \\
-t_3 & 0 & -t_1 \\
--t_2 & t_1 & 0
-\end{bmatrix}
-$$
-With given camera matrices, we are able to get fundamental matrices between every pairs of the images, and then use it to calculate the epipolar line for removing outliers. We do this with a threshold of 0.25, and the cleaned correspondence looks as below:
+Before adding more images into scope, we first validate the correspondence. The plain correspondence we derived above might include some noises. This might not be obvious when we are only building the reconstruction with two images, but as we increase our data set size, the error will accumulate and bring a large number of false correspondence. Therefore, we use fundamental matrix to remove outliers. With given camera matrices, we are able to get fundamental matrices between every pairs of the images, and then use it to calculate the epipolar line for removing outliers. We do this with a threshold of 0.25, and the cleaned correspondence looks as below:
 ![clean](doc/clean.png)
 
 (With a threshold of 25.0 in validating correspondences)
